@@ -127,7 +127,7 @@ where rank = 1
 order by year, month, avg_sale desc;
 ```
 
-8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
+8. **Write a SQL query to find the top 5 customers based on the highest total sales**:
 ```sql
 select top 5 
     customer_id,
