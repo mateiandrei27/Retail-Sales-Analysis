@@ -1,5 +1,5 @@
 	-- Data Cleaning
-DELETE FROM retail_sales
+delete from retail_sales
 	where 
 	transactions_id IS NULL
 	OR
@@ -43,7 +43,7 @@ from retail_sales
 where
 	category = 'Clothing'
 	and
-	CONVERT(varchar(7), sale_date, 120) = '2022-11'
+	convert(varchar(7), sale_date, 120) = '2022-11'
 	AND
 	quantity >= 4
 	
@@ -78,27 +78,27 @@ group by
 order by category
 
 	--Write a SQL query to calculate the average sale for each month. Find out best selling month in each year
-WITH RankedSales AS (
-    SELECT 
-        YEAR(sale_date) AS year,
-        MONTH(sale_date) AS month,
-        AVG(total_sale) AS avg_sale,
-        RANK() OVER (PARTITION BY YEAR(sale_date) ORDER BY AVG(total_sale) DESC) AS rank
-    FROM retail_sales
-    GROUP BY YEAR(sale_date), MONTH(sale_date)
+with RankedSales as (
+    select 
+        year(sale_date) as year,
+        month(sale_date) as month,
+        avg(total_sale) as avg_sale,
+        rank() over (partition by year(sale_date) order by AVG(total_sale) desc) as rank
+    from retail_sales
+    group by year(sale_date), month(sale_date)
 )
-SELECT year, month, avg_sale
-FROM RankedSales
-WHERE rank = 1
-ORDER BY year, month, avg_sale DESC;
+select year, month, avg_sale
+from RankedSales
+where rank = 1
+order by year, month, avg_sale desc;
 
 	--Write a SQL query to find the top 5 customers based on the highest total sales
-SELECT TOP 5 
+select top 5 
     customer_id,
-    SUM(total_sale) AS total_sales
-FROM retail_sales
-GROUP BY customer_id
-ORDER BY total_sales DESC;
+    sum(total_sale) as total_sales
+from retail_sales
+group by customer_id
+order by total_sales desc;
 
 
 	--Write a SQL query to find the number of unique customers who purchased items from each category
@@ -109,17 +109,17 @@ from retail_sales
 group by category
 
 	--Write a SQL query to create each shift and number of oreders (Ex: Morning <=12, Afternoon between 12&17, Evening >17)
-WITH hourly_sale AS (
-    SELECT *,
-        CASE
-            WHEN DATEPART(HOUR, sale_time) < 12 THEN 'Morning'
-            WHEN DATEPART(HOUR, sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
-            ELSE 'Evening'
-        END AS shift
-    FROM retail_sales
+with hourly_sale as (
+    select *,
+        case
+            when datepart(hour, sale_time) < 12 then 'Morning'
+            when datepart(hour, sale_time) between 12 and 17 then 'Afternoon'
+            else 'Evening'
+        end as shift
+    from retail_sales
 )
-SELECT 
+select 
     shift,
-    COUNT(*) AS total_orders
-FROM hourly_sale
-GROUP BY shift;
+    count(*) as total_orders
+from hourly_sale
+group by shift;
