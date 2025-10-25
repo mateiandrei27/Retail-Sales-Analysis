@@ -1,182 +1,139 @@
-# Retail Sales Analysis SQL Project
+#  Retail Sales Analysis – Business Case
 
-## Project Overview
+## 1. Business Context  
+A mid-sized retail company operating across multiple sales channels (in-store and online) seeks to understand its sales performance, customer behavior, and category profitability.  
+This analysis leverages historical transaction data to identify key business drivers, seasonal patterns, and optimization opportunities.
 
-In this project, I demonstrate my SQL skills and techniques by exploring, cleaning, and analyzing retail sales data. I set up a retail sales database, perform exploratory data analysis (EDA), and answer key business questions through SQL queries.
+---
 
-## Objectives
+## 2. Objective  
+The goal of this project is to extract actionable insights from sales data to:  
+- Identify **top-performing product categories** and their revenue share.  
+- Analyze **customer demographics** and high-value customer segments.  
+- Understand **temporal sales trends** (time of day, seasonality).  
+- Evaluate **gender-based purchasing patterns**.  
+- Provide **data-driven recommendations** to optimize sales strategy.  
 
-1. **Set up a retail sales database**: Create and populate a retail sales database with the provided sales data.
-2. **Data Cleaning**: Identify and remove any records with missing or null values.
-3. **Exploratory Data Analysis (EDA)**: Perform basic exploratory data analysis to understand the dataset.
-4. **Business Analysis**: Use SQL to answer specific business questions and derive insights from the sales data.
+The full SQL analysis queries used for this project can be found **[here](./sql/retail_sales_queries.sql)**.
 
-## Project Structure
+---
 
-### Data Exploration & Cleaning
+## 3. Business Questions  
+This project aims to answer the following key business questions:  
+1. Which product categories drive the majority of sales and revenue?  
+2. Who are the top 5 customers contributing most to total revenue?  
+3. What is the average age of customers per category, and what does that imply for marketing segmentation?  
+4. Which month and time of day record the highest sales volumes?  
+5. Are there notable differences in purchasing behavior between male and female customers?  
+6. How can these insights guide marketing, staffing, and inventory decisions?
 
-- **Record Count**: Determine the total number of records in the dataset.
-- **Customer Count**: Find out how many unique customers are in the dataset.
-- **Category Count**: Identify all unique product categories in the dataset.
-- **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
+---
 
-```sql
-delete from retail_sales
-	where 
-	transactions_id IS NULL
-	OR
-	sale_date IS NULL
-	OR
-	sale_time IS NULL
-	OR
-	customer_id IS NULL
-	OR
-	gender IS NULL
-	OR
-	age IS NULL
-	OR
-	category IS NULL
-	OR
-	quantity IS NULL
-	OR
-	price_per_unit IS NULL
-	OR
-	cogs IS NULL
-	OR
-	total_sale IS NUll
-select count(*)  as total_sales from retail_sales
-select count(customer_id) as total_customers from retail_sales
-select count(distinct customer_id) as unique_customers from retail_sales
-```
+## 4. Dataset Description  
+- **Data source:** Internal retail database (anonymized sample).  
+- **Period covered:** **January 2022 – December 2023**  
+- **Total transactions:** **1,987**  
+- **Key fields:**  
+  - `transactions_id` – Unique transaction identifier  
+  - `sale_date`, `sale_time` – Timestamp of transaction  
+  - `customer_id`, `gender`, `age` – Customer demographics  
+  - `category`, `quantity`, `price_per_unit`, `cogs`, `total_sale`  
 
-### Data Analysis & Findings
+---
 
-The following SQL queries were developed to answer specific business questions:
+## 5. Tools & Technologies  
+- **Database:** PostgreSQL  
+- **Analysis:** SQL (data cleaning, aggregation, business logic)   
+- **Environment:** DBeaver
 
-1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
-```sql
-select *
-from retail_sales
-where sale_date = '2022-11-05'
-```
+---
 
-2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
-```sql
-select * 
-from retail_sales
-where
-	category = 'Clothing'
-	and
-	convert(varchar(7), sale_date, 120) = '2022-11'
-	AND
-	quantity >= 4
-```
+## 6. Key Insights  
 
-3. **Write a SQL query to calculate the total sales (total_sale) for each category.**:
-```sql
-select
-	category,
-	sum(total_sale) as net_sale,
-	count (*) as total_orders
-from retail_sales
-group by category
-order by net_sale desc
-```
+###  Product Category Performance  
+| Category | Total Sales | % of Total Revenue |
+|-----------|--------------|--------------------|
+| Electronics | 311,445 | 34.29% |
+| Clothing | 309,995 | 34.13% |
+| Beauty | 286,790 | 31.58% |
 
-4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
-```sql
-select 
-	round(avg(age),2) as avg_age
-from retail_sales
-where category = 'Beauty'
-```
+**Insight:**  
+Sales are well distributed across the three main categories, with Electronics slightly leading. Combined, these categories represent **100% of total sales**, indicating a balanced product portfolio.
 
-5. **Write a SQL query to find all transactions where the total_sale is greater than 1000.**:
-```sql
-select * from retail_sales
-where total_sale > 1000
-```
+---
 
-6. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
-```sql
-select
-	category,
-	gender,
-	count (*) as total_transactions
-from retail_sales
-group by
-	category,
-	gender
-order by category
-```
+###  Top 5 Customers by Revenue  
+| Customer ID | Total Sales | % of Total |
+|--------------|-------------|-------------|
+| 3 | 38,440 | 4.23% |
+| 1 | 30,750 | 3.39% |
+| 5 | 30,405 | 3.35% |
+| 2 | 25,295 | 2.79% |
+| 4 | 23,580 | 2.60% |
 
-7. **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year**:
-```sql
-with RankedSales as (
-    select 
-        year(sale_date) as year,
-        month(sale_date) as month,
-        avg(total_sale) as avg_sale,
-       rank() over (partition by year(sale_date) order by avg(total_sale) desc) as rank
-    from retail_sales
-    group by year(sale_date), month(sale_date)
-)
-select year, month, avg_sale
-from RankedSales
-where rank = 1
-order by year, month, avg_sale desc;
-```
+**Insight:**  
+The top 5 customers together contribute nearly **16.36%** of total revenue — a clear opportunity for **customer retention and loyalty initiatives**.
 
-8. **Write a SQL query to find the top 5 customers based on the highest total sales**:
-```sql
-select top 5 
-    customer_id,
-    sum(total_sale) as total_sales
-from retail_sales
-group by customer_id
-order by total_sales desc;
-```
+---
 
-9. **Write a SQL query to find the number of unique customers who purchased items from each category.**:
-```sql
-select 
-	category,
-	count(distinct customer_id) as cnt_unique_cs
-from retail_sales
-group by category
-```
+###  Customer Age Analysis  
+| Category | Average Age |
+|-----------|--------------|
+| Overall | 41.35 |
+| Electronics | 41.60 |
+| Clothing | 41.93 |
+| Beauty | 40.42 |
 
-10. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)**:
-```sql
-with hourly_sale as (
-    select *,
-        case
-            when datepart(hour, sale_time) < 12 then 'Morning'
-            when datepart(hour, sale_time) between 12 and 17 then 'Afternoon'
-            else 'Evening'
-        end as shift
-    from retail_sales
-)
-select 
-    shift,
-    count(*) as total_orders
-from hourly_sale
-group by shift;
-```
+**Insight:**  
+Customers are predominantly in the **40–42 age range**, suggesting that **marketing efforts** should target a mature audience with higher purchasing power and brand loyalty tendencies.
 
-## Findings
+---
 
-- **Customer Demographics**: The dataset includes customers from various age groups, with sales distributed across different categories such as Clothing and Beauty.
-- **High-Value Transactions**: Several transactions had a total sale amount greater than 1000, indicating premium purchases.
-- **Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
-- **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
+###  Peak Sales Periods  
+- **Peak Month:** **December 2022 (₤71,880 total sales)**  
+- **Peak Time of Day:** **Evening (₤390,065 total sales)**  
 
-## Reports
+**Insight:**  
+Sales spike during **December**, likely due to the holiday season, and peak in the **Evening hours (6–9 PM)** — ideal for running **targeted promotions or flash sales** during that period.
 
-- **Sales Summary**: A detailed report summarizing total sales, customer demographics, and category performance.
-- **Trend Analysis**: Insights into sales trends across different months and shifts.
-- **Customer Insights**: Reports on top customers and unique customer counts per category.
+---
 
-## Conclusion
+###  Gender Trends  
+| Gender | Total Sales | % of Total |
+|---------|-------------|-------------|
+| Female | 463,110 | 50.99% |
+| Male | 445,120 | 49.01% |
 
-This project showcases my ability to work with SQL for data analysis, covering database setup, data cleaning, EDA, and business-driven queries. The insights gained from this analysis help drive data-informed business decisions by uncovering sales patterns, customer behavior, and product performance.
+**Insight:**  
+Purchasing behavior is almost evenly split between genders, with **females slightly leading (51%)** — suggesting that marketing strategies should maintain a **gender-balanced approach**.
+
+---
+
+## 7. Business Recommendations  
+
+1. **Leverage seasonal trends:**  
+   - Launch marketing campaigns and promotions in **Q4**, particularly in **December**, to maximize holiday-driven sales.  
+
+2. **Focus on customer retention:**  
+   - Implement a **loyalty or rewards program** for high-value customers (top 5 contribute 16% of total revenue).  
+
+3. **Optimize marketing by demographics:**  
+   - Target age group **40–45** with lifestyle-focused campaigns.  
+
+4. **Adjust operational strategy:**  
+   - Increase staffing and inventory availability during **Evening hours**, when customer activity peaks.  
+
+5. **Maintain category balance:**  
+   - Electronics, Clothing, and Beauty all perform strongly — continue diversified product focus rather than over-investing in a single category.  
+
+---
+
+## 8. Limitations & Future Work  
+- Data is historical (2022–2023), not real-time.  
+- Lacks geographical segmentation (cannot assess regional performance).  
+- Profit and margin analyses can be expanded with product-level granularity.  
+
+**Next Steps:**  
+- Integrate sales with CRM data for customer segmentation (RFM analysis).  
+- Develop **interactive dashboards (Power BI / Tableau)** for management reporting.  
+- Explore **predictive analytics** (forecasting sales by category and month).
