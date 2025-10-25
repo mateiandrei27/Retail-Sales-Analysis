@@ -14,7 +14,7 @@ The goal of this project is to extract actionable insights from sales data to:
 - Evaluate **gender-based purchasing patterns**.  
 - Provide **data-driven recommendations** to optimize sales strategy.  
 
-The full SQL analysis queries used for this project can be found **[here](/Retail Sales Analysis.sql)**.
+The full SQL analysis queries used for this project can be found **[here](retail_sales_queries.sql)**.
 
 ---
 
