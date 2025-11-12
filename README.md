@@ -94,7 +94,7 @@ Customers are predominantly in the **40–42 age range**, suggesting that **mark
 - **Peak Time of Day:** **Evening (₤390,065 total sales)**  
 
 **Insight:**  
-Sales spike during **December**, likely due to the holiday season, and peak in the **Evening hours (6–9 PM)** — ideal for running **targeted promotions or flash sales** during that period.
+Sales spike during **December**, likely due to the holiday season, and peak in the **Evening hours (6–9 PM)** - ideal for running **targeted promotions or flash sales** during that period.
 
 ---
 
@@ -105,7 +105,7 @@ Sales spike during **December**, likely due to the holiday season, and peak in t
 | Male | 445,120 | 49.01% |
 
 **Insight:**  
-Purchasing behavior is almost evenly split between genders, with **females slightly leading (51%)** — suggesting that marketing strategies should maintain a **gender-balanced approach**.
+Purchasing behavior is almost evenly split between genders, with **females slightly leading (51%)** - suggesting that marketing strategies should maintain a **gender-balanced approach**.
 
 ---
 
