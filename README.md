@@ -72,7 +72,7 @@ Sales are well distributed across the three main categories, with Electronics sl
 | 4 | 23,580 | 2.60% |
 
 **Insight:**  
-The top 5 customers together contribute nearly **16.36%** of total revenue — a clear opportunity for **customer retention and loyalty initiatives**.
+The top 5 customers together contribute nearly **16.36%** of total revenue - a clear opportunity for **customer retention and loyalty initiatives**.
 
 ---
 
