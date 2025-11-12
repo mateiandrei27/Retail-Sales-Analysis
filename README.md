@@ -124,7 +124,7 @@ Purchasing behavior is almost evenly split between genders, with **females sligh
    - Increase staffing and inventory availability during **Evening hours**, when customer activity peaks.  
 
 5. **Maintain category balance:**  
-   - Electronics, Clothing, and Beauty all perform strongly — continue diversified product focus rather than over-investing in a single category.  
+   - Electronics, Clothing, and Beauty all perform strongly - continue diversified product focus rather than over-investing in a single category.  
 
 ---
 
