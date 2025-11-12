@@ -31,12 +31,12 @@ This project aims to answer the following key business questions:
 
 ## 4. Dataset Description  
 - **Data source:** Internal retail database (anonymized sample).  
-- **Period covered:** **January 2022 – December 2023**  
+- **Period covered:** **January 2022 - December 2023**  
 - **Total transactions:** **1,987**  
 - **Key fields:**  
-  - `transactions_id` – Unique transaction identifier  
-  - `sale_date`, `sale_time` – Timestamp of transaction  
-  - `customer_id`, `gender`, `age` – Customer demographics  
+  - `transactions_id` - Unique transaction identifier  
+  - `sale_date`, `sale_time` - Timestamp of transaction  
+  - `customer_id`, `gender`, `age` - Customer demographics  
   - `category`, `quantity`, `price_per_unit`, `cogs`, `total_sale`  
 
 ---
