@@ -1,5 +1,17 @@
 #  Retail Sales Analysis – Business Case
 
+## Executive Summary
+This project analyzes 1,987 retail transactions from 2022–2023 to identify revenue drivers, customer behavior patterns, and sales opportunities. Using PostgreSQL, I cleaned and analyzed the dataset, calculated key business metrics, and translated the findings into practical recommendations for business decisions.
+
+## SQL Skills Demonstrated
+- Data cleaning and null checks
+- Aggregations using GROUP BY
+- Revenue calculations
+- Customer ranking
+- Time-based analysis
+- Category performance analysis
+- CASE statements
+
 ## 1. Business Context  
 A mid-sized retail company operating across multiple sales channels (in-store and online) seeks to understand its sales performance, customer behavior, and category profitability.  
 This analysis leverages historical transaction data to identify key business drivers, seasonal patterns, and optimization opportunities.
@@ -21,7 +33,7 @@ The full SQL analysis queries used for this project can be found **[here](retail
 ## 3. Business Questions  
 This project aims to answer the following key business questions:  
 1. Which product categories drive the majority of sales and revenue?  
-2. Who are the top 5 customers contributing most to total revenue?  
+2. Who are the  5 customers contributing most to total revenue?  
 3. What is the average age of customers per category, and what does that imply for marketing segmentation?  
 4. Which month and time of day record the highest sales volumes?  
 5. Are there notable differences in purchasing behavior between male and female customers?  
