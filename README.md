@@ -121,26 +121,8 @@ Purchasing behavior is almost evenly split between genders, with **females sligh
 
 ---
 
-## 7. Business Recommendations  
 
-1. **Leverage seasonal trends:**  
-   - Launch marketing campaigns and promotions in **Q4**, particularly in **December**, to maximize holiday-driven sales.  
-
-2. **Focus on customer retention:**  
-   - Implement a **loyalty or rewards program** for high-value customers (top 5 contribute 16% of total revenue).  
-
-3. **Optimize marketing by demographics:**  
-   - Target age group **40–45** with lifestyle-focused campaigns.  
-
-4. **Adjust operational strategy:**  
-   - Increase staffing and inventory availability during **Evening hours**, when customer activity peaks.  
-
-5. **Maintain category balance:**  
-   - Electronics, Clothing, and Beauty all perform strongly - continue diversified product focus rather than over-investing in a single category.  
-
----
-
-## Business Impact
+## 7. Business Impact
 The analysis highlights several opportunities to improve business performance:
 
 - Revenue can be increased by focusing on top-performing products through targeted promotions and upselling strategies.
