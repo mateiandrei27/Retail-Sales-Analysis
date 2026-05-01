@@ -140,6 +140,16 @@ Purchasing behavior is almost evenly split between genders, with **females sligh
 
 ---
 
+## Business Impact
+The analysis highlights several opportunities to improve business performance:
+
+- Revenue can be increased by focusing on top-performing products through targeted promotions and upselling strategies.
+- Customer retention strategies can be developed for high-value clients who generate a significant portion of total revenue.
+- Marketing efforts should focus more on product categories and customer behavior rather than gender, as gender distribution is balanced.
+- Sales patterns across time suggest opportunities for optimizing staffing and promotional campaigns during peak and low periods.
+
+---
+
 ## 8. Limitations & Future Work  
 - Data is historical (2022–2023), not real-time.  
 - Lacks geographical segmentation (cannot assess regional performance).  
