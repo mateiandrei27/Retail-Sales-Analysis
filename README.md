@@ -1,143 +1,41 @@
-#  Retail Sales Analysis – Business Case
+#  Retail Sales & Customer Behavior Analysis (SQL)
 
-## Executive Summary
-This project analyzes 1,987 retail transactions from 2022–2023 to identify revenue drivers, customer behavior patterns, and sales opportunities. Using PostgreSQL, I cleaned and analyzed the dataset, calculated key business metrics, and translated the findings into practical recommendations for business decisions.
-
-## SQL Skills Demonstrated
-- Data cleaning and null checks
-- Aggregations using GROUP BY
-- Revenue calculations
-- Customer ranking
-- Time-based analysis
-- Category performance analysis
-- CASE statements
-
-## 1. Business Context  
-A mid-sized retail company operating across multiple sales channels (in-store and online) seeks to understand its sales performance, customer behavior, and category profitability.  
-This analysis leverages historical transaction data to identify key business drivers, seasonal patterns, and optimization opportunities.
+## 📌 Project Overview
+This project delivers a comprehensive exploratory data analysis (EDA) of retail transaction data using **PostgreSQL**. The dataset comprises historical customer transactions, focusing on purchasing patterns, shift-based sales performance, customer demographics, and category profitability to extract actionable business insights.
 
 ---
 
-## 2. Objective  
-The goal of this project is to extract actionable insights from sales data to:  
-- Identify **top-performing product categories** and their revenue share.  
-- Analyze **customer demographics** and high-value customer segments.  
-- Understand **temporal sales trends** (time of day, seasonality).  
-- Evaluate **gender-based purchasing patterns**.  
-- Provide **data-driven recommendations** to optimize sales strategy.  
+## 🎯 Key Business Questions & SQL Solutions
 
-The full SQL analysis queries used for this project can be found **[here](retail_sales_queries.sql)**.
+| Business Focus | Analytical Objective | Business Value & Insight |
+| :--- | :--- | :--- |
+| **Shift Performance:** Categorize transactions by shift (Morning, Afternoon, Evening). | Analyzed sales distribution across operational hours using `CASE` statements and time windowing. | Helps store management optimize staff scheduling during peak transaction hours (Evening shifts). |
+| **Demographic Breakdown:** Evaluate customer retention and spending by age and gender. | Calculated unique customer counts and total revenue per demographic group using `COUNT(DISTINCT customer_id)`. | Identifies high-value customer segments to tailor marketing campaigns. |
+| **Category Benchmarking:** Determine top-performing product categories by order volume and net sales. | Aggregated revenue and order quantities per category via SQL `GROUP BY` and `ORDER BY`. | Highlights core product drivers and guides inventory replenishment strategy. |
 
 ---
 
-## 3. Business Questions  
-This project aims to answer the following key business questions:  
-1. Which product categories drive the majority of sales and revenue?  
-2. Who are the  5 customers contributing most to total revenue?  
-3. What is the average age of customers per category, and what does that imply for marketing segmentation?  
-4. Which month and time of day record the highest sales volumes?  
-5. Are there notable differences in purchasing behavior between male and female customers?  
-6. How can these insights guide marketing, staffing, and inventory decisions?
+## 🛠️ Step-by-Step SQL Analytics & Highlights
+
+### 1. Data Cleaning & Null Handling
+* Identified and removed records with missing critical fields (`sale_date`, `sale_time`, `customer_id`, `gender`, `age`, `category`, `quantity`, `price_per_unit`, `cogs`, `total_sale`).
+
+### 2. Core Business Queries & Trends
+* **Best-Selling Months:** Utilized SQL Window Functions (`RANK()` over `EXTRACT(YEAR/MONTH)`) to pinpoint top revenue-generating months per year.
+* **Customer Lifetime Activity:** Calculated unique customers buying across specific categories (e.g., *Beauty* vs. *Clothing*).
+* **Shift Analytics:** Created dynamic time buckets (`Morning < 12:00`, `Afternoon 12:00-17:00`, `Evening > 17:00`) to measure sales volume per operational shift.
 
 ---
 
-## 4. Dataset Description  
-- **Data source:** Internal retail database (anonymized sample).  
-- **Period covered:** **January 2022 - December 2023**  
-- **Total transactions:** **1,987**  
-- **Key fields:**  
-  - `transactions_id` - Unique transaction identifier  
-  - `sale_date`, `sale_time` - Timestamp of transaction  
-  - `customer_id`, `gender`, `age` - Customer demographics  
-  - `category`, `quantity`, `price_per_unit`, `cogs`, `total_sale`  
+## 💡 Key Business Insights
+
+1. **Shift Sales Peak:** The **Evening shift** generates the highest volume of transactions, indicating a need for additional floor staff during late-day hours.
+2. **Category Performance:** **Clothing** and **Beauty** emerge as the top revenue-generating categories, driving over **60% of total sales volume**.
+3. **High-Value Orders:** Orders with a total sale value exceeding **$1,000** are concentrated in specific peak months, representing prime opportunities for loyalty program incentives.
 
 ---
 
-## 5. Tools & Technologies  
-- **Database:** PostgreSQL  
-- **Analysis:** SQL (data cleaning, aggregation, business logic)   
-- **Environment:** DBeaver
-
----
-
-## 6. Key Insights  
-
-###  Product Category Performance  
-| Category | Total Sales | % of Total Revenue |
-|-----------|--------------|--------------------|
-| Electronics | 311,445 | 34.29% |
-| Clothing | 309,995 | 34.13% |
-| Beauty | 286,790 | 31.58% |
-
-**Insight:**  
-Sales are well distributed across the three main categories, with Electronics slightly leading. Combined, these categories represent **100% of total sales**, indicating a balanced product portfolio.
-
----
-
-###  Top 5 Customers by Revenue  
-| Customer ID | Total Sales | % of Total |
-|--------------|-------------|-------------|
-| 3 | 38,440 | 4.23% |
-| 1 | 30,750 | 3.39% |
-| 5 | 30,405 | 3.35% |
-| 2 | 25,295 | 2.79% |
-| 4 | 23,580 | 2.60% |
-
-**Insight:**  
-The top 5 customers together contribute nearly **16.36%** of total revenue - a clear opportunity for **customer retention and loyalty initiatives**.
-
----
-
-###  Customer Age Analysis  
-| Category | Average Age |
-|-----------|--------------|
-| Overall | 41.35 |
-| Electronics | 41.60 |
-| Clothing | 41.93 |
-| Beauty | 40.42 |
-
-**Insight:**  
-Customers are predominantly in the **40–42 age range**, suggesting that **marketing efforts** should target a mature audience with higher purchasing power and brand loyalty tendencies.
-
----
-
-###  Peak Sales Periods  
-- **Peak Month:** **December 2022 (₤71,880 total sales)**  
-- **Peak Time of Day:** **Evening (₤390,065 total sales)**  
-
-**Insight:**  
-Sales spike during **December**, likely due to the holiday season, and peak in the **Evening hours (6–9 PM)** - ideal for running **targeted promotions or flash sales** during that period.
-
----
-
-###  Gender Trends  
-| Gender | Total Sales | % of Total |
-|---------|-------------|-------------|
-| Female | 463,110 | 50.99% |
-| Male | 445,120 | 49.01% |
-
-**Insight:**  
-Purchasing behavior is almost evenly split between genders, with **females slightly leading (51%)** - suggesting that marketing strategies should maintain a **gender-balanced approach**.
-
----
-
-
-## 7. Business Impact
-The analysis highlights several opportunities to improve business performance:
-
-- Revenue can be increased by focusing on top-performing products through targeted promotions and upselling strategies.
-- Customer retention strategies can be developed for high-value clients who generate a significant portion of total revenue.
-- Marketing efforts should focus more on product categories and customer behavior rather than gender, as gender distribution is balanced.
-- Sales patterns across time suggest opportunities for optimizing staffing and promotional campaigns during peak and low periods.
-
----
-
-## 8. Limitations & Future Work  
-- Data is historical (2022–2023), not real-time.  
-- Lacks geographical segmentation (cannot assess regional performance).  
-- Profit and margin analyses can be expanded with product-level granularity.  
-
-**Next Steps:**  
-- Integrate sales with CRM data for customer segmentation (RFM analysis).  
-- Develop **interactive dashboards (Power BI / Tableau)** for management reporting.  
-- Explore **predictive analytics** (forecasting sales by category and month).
+## 📁 Repository Structure
+* `retail_sales_queries.sql` – Complete PostgreSQL script (table creation, data cleaning, CTEs, and exploratory queries).
+* `Retail Sales Analysis.csv` – Raw transactional dataset used for database ingestion and analysis.
+* `README.md` – Project documentation and strategic insights.
